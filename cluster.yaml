@@ -1,0 +1,20 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: cluster-in-existing-vpc
+  region: ap-southeast-1
+
+vpc:
+  subnets:
+    private:
+      ap-southeast-1a: { id: subnet-10548176 }
+      ap-southeast-1b: { id: subnet-50ed2818 }
+      ap-southeast-1c: { id: subnet-655bdb3c }
+
+nodeGroups:
+  - name: ng-es
+    labels: { role: workers }
+    instanceType: t3a.small
+    desiredCapacity: 8
+    privateNetworking: true
